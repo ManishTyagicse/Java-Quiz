@@ -1,5 +1,9 @@
+import java.util.Scanner;
+
 public class QuestionsService{
     Question questions[] = new Question[5];
+
+    String selections[] = new String[5];
 
     public QuestionsService(){
         questions[0] = new Question(1, "What are you learning", "C++", "Java", "C#", "Python", "Java");
@@ -9,9 +13,40 @@ public class QuestionsService{
         questions[4] = new Question(5, "What are you learning", "C++", "Java", "C#", "Python", "Java");
     }
 
-    public void displayQuestion(){
+    public void playQuiz(){
+        int i=0;
         for(Question q : questions){
-            System.out.println(q);
+            System.out.println("Question no: " + q.getId());
+            System.out.println(q.getQuestion());
+            System.out.println(q.getOpt1());
+            System.out.println(q.getOpt2());
+            System.out.println(q.getOpt3());
+            System.out.println(q.getOpt4());
+
+            Scanner sc = new Scanner(System.in);
+            selections[i] = sc.nextLine();
+            i++;
         }
+
+        System.out.println("***************************************/");
+        System.out.println("Your answers are : \n");
+        for(String s : selections){
+            System.out.println(s);
+        }
+    }
+
+    public void printScore(){
+        int score=0;
+        for(int i=0;i<questions.length;i++){
+            Question ques = questions[i];
+
+            String actualAnswer = ques.getAnswer();
+            String userAnswer = selections[i];
+
+            if(actualAnswer.equals(userAnswer))
+                score++;
+        }
+
+        System.out.println("Your final score is : " + score);
     }
 }
